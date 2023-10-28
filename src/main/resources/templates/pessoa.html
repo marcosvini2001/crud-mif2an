@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylecursos.css">
+    <link rel="stylesheet" href="form_video.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <title>UNI RUMO</title>
+</head>
+
+<body>
+    <header>
+     
+        <nav class="navbar navbar-expand-lg bg-body-tertiary  navbar-light">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse " id="navbarNavDropdown">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.html"><b>Home</b></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-bs-toggle="modal"
+                                data-bs-target="#loginModal"><b>Login</b></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-bs-toggle="modal"
+                                data-bs-target="#cadastroModal"><b>Cadastro</b></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-bs-toggle="modal"
+                                data-bs-target="#parceriasModal"><b>Parcerias</b></a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false"><b>Cursos</b></a>
+                            <ul class="dropdown-menu" id="cursocolor">
+                                <li><a class="dropdown-item" href="tecnologia.html">Tecnologia</a></li>
+                                <li><a class="dropdown-item" href="humanas.html">Humanas</a></li>
+                                <li><a class="dropdown-item" href="financas.html">Finanças</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#cont"><b>Contato</b></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="start">
+        <div>
+            <b>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut etiam sit amet nisl purus in mollis nunc. Id leo in vitae turpis. Morbi tristique senectus et netus et. Ac feugiat sed lectus vestibulum. Fames ac turpis egestas maecenas pharetra convallis. Cursus risus at ultrices mi tempus. Eget mi proin sed libero enim sed faucibus. Sit amet commodo nulla facilisi nullam vehicula. Lacus sed viverra tellus in hac. Est pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus. Penatibus et magnis dis parturient montes nascetur ridiculus mus mauris. Vel elit scelerisque mauris pellentesque pulvinar pellentesque. Id faucibus nisl tincidunt eget nullam non nisi. Mus mauris vitae ultricies leo integer malesuada nunc vel.</b>
+        </div>
+    </section>
+    
+    
+    <section class="info">
+        <h1>Cadastro</h1>
+	
+		<form action="/pessoa/novo" method="post">
+		
+			<input type="hidden" name="id" th:value="${pessoa.id}"> <br>
+	
+			<span for="email">Email:</span>
+			<input type="text" name="email" th:value="${pessoa.email}"> <br>
+			
+			<span for="descricao">Senha:</span>
+			<input type="text" name="senha" th:value="${pessoa.senha}"> <br>
+			
+			<span for="preco">Telefone:</span>
+			<input type="text" name="telefone" th:value="${pessoa.telefone}"> <br>
+			
+			<span for="tipo">Opção de curso:</span>
+			<select name="tipo">
+				<option value="0">Selecione um curso</option>
+				<option th:each="tipo : ${tipos}" th:value="${tipo.id}" th:text="${tipo.nome}" 					th:selected="${pessoa.tipo != null and tipo.id == pessoa.tipo.id}">
+			</select> <br>
+			
+			<input type="submit" value="Salvar">
+		</form>
+		
+	</body>
+    
+    
+    </section>
+    
+    
+    
+    
+    <section class="contato">
+        <div id="cont">
+            <h2>Informações de Contato</h2>
+            <ul>
+                <li>Email: contato@unirumo.com</li>
+                <li>Telefone: (11) 23456-7890</li>
+                <li>Instagram: @uni_rumo</li>
+                <li>Discord: Unirumo#1234</li>
+            </ul>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2023 Uni-Rumo. Todos os direitos reservados.</p>
+    </footer>
+
+    <div class="modal fade" id="cadastroModal" tabindex="-1" aria-labelledby="cadastroModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cadastroModalLabel">CADASTRO</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nome Completo:</label>
+                            <input type="text" class="form-control" id="name_aluno" required="required"
+                                placeholder="Digite seu nome completo">
+                        </div>
+                        <div class="mb-3">
+                            <p>Sexo: <input type="radio" name="sex" required="required">Masculino &nbsp;
+                                <input type="radio" name="sex" required="required">Feminino &nbsp;
+                            </p>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="email" class="form-control" id="email_aluno" required="required"
+                                placeholder="texto@texto.com.br">
+                        </div>
+                        <div class="mb-3">
+                            <label for="senha" class="form-label">Senha:</label>
+                            <input type="password" class="form-control" required="required" id="senha_aluno">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Telefone:</label>
+                            <input type="tel" class="form-control" required="required" id="txtfone"
+                                placeholder="(xx) xxxx-xxxx">
+                        </div>
+
+                        <hr>
+
+                        <div class="mb-3">
+                            <p>Estado:<select>
+                                    <option>AC </option>
+                                    <option>AL </option>
+                                    <option>AP </option>
+                                    <option>AM </option>
+                                    <option>BA </option>
+                                    <option>CE </option>
+                                    <option>DF </option>
+                                    <option>ES </option>
+                                    <option>GO </option>
+                                    <option>MA </option>
+                                    <option>MT </option>
+                                    <option>MS </option>
+                                    <option>MG </option>
+                                    <option>PA </option>
+                                    <option>PB </option>
+                                    <option>PR </option>
+                                    <option>PE </option>
+                                    <option>PI </option>
+                                    <option>RJ </option>
+                                    <option>RN </option>
+                                    <option>RS </option>
+                                    <option>RO </option>
+                                    <option>RR </option>
+                                    <option>SC </option>
+                                    <option>SP </option>
+                                    <option>SE </option>
+                                    <option>TO </option>
+                                </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <p>Cidade: <input type="text" size="15" required="required" pattern="[aA-zZ\s]+$" />
+                                Bairro: <input type="text" size="15" required="required"
+                                    pattern="[aA-zZ\s]+$" /><br><br>
+                                Rua: <input type="text" size="15" required="required" pattern="[aA-zZ\s]+$" />
+                                Número: <input type="number" size="1" required="required" pattern="[0-9]+$" cols="4" />
+                            </p>
+                            <hr>
+                        </div>
+
+                        <div class="mb-3">
+                            <p>Estado Civil: <select>
+                                    <option>Solteiro(a)</option>
+                                    <option>Casado(a)</option>
+                                    <option>Divorciado(a) </option>
+                                    <option>Viúvo(a)</option>
+                                </select>
+                            </p>
+                        </div>
+
+                        <div class="mb-3">
+                            <p>Situação: <select>
+                                    <option>Empregado(a)</option>
+                                    <option>Desempregado(a)</option>
+                                    <option>Cursando Ensino Médio </option>
+                                    <option>Cursando Ensino Superior</option>
+                                </select>
+                            </p>
+                        </div>
+
+                        <div class="mb-3">
+                            <p>Qual Curso te Interessa?: <select>
+                                    <option>Curso 1</option>
+                                    <option>Curso 2</option>
+                                    <option>Curso 3 </option>
+                                </select>
+                            </p>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Entrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="parceriasModal" tabindex="-1" aria-labelledby="parceriasModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="parceriasModalLabel">PARCERIAS</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nome da Instituição:</label>
+                            <input type="text" class="form-control" id="name_professor"
+                                placeholder="Digite seu nome completo">
+                        </div>
+                        <div class="mb-3">
+                            <p>Tipo de Instituição: <input type="radio" name="sex">Pública &nbsp;
+                                <input type="radio" name="sex">Privada &nbsp;
+                            </p>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Institucional:</label>
+                            <input type="email" class="form-control" id="email_professor" required="required"
+                                placeholder="texto@texto.com.br">
+                        </div>
+                        <div class="mb-3">
+                            <label for="senha" class="form-label">Senha:</label>
+                            <input type="password" class="form-control" required="required" id="senha_professor">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Telefone:</label>
+                            <input type="tel" class="form-control" id="txtfone" required="required"
+                                placeholder="(xx) xxxx-xxxx">
+                        </div>
+
+                        <hr>
+
+                        <div class="mb-3">
+                            Estado:<select>
+                                <option>AC </option>
+                                <option>AL </option>
+                                <option>AP </option>
+                                <option>AM </option>
+                                <option>BA </option>
+                                <option>CE </option>
+                                <option>DF </option>
+                                <option>ES </option>
+                                <option>GO </option>
+                                <option>MA </option>
+                                <option>MT </option>
+                                <option>MS </option>
+                                <option>MG </option>
+                                <option>PA </option>
+                                <option>PB </option>
+                                <option>PR </option>
+                                <option>PE </option>
+                                <option>PI </option>
+                                <option>RJ </option>
+                                <option>RN </option>
+                                <option>RS </option>
+                                <option>RO </option>
+                                <option>RR </option>
+                                <option>SC </option>
+                                <option>SP </option>
+                                <option>SE </option>
+                                <option>TO </option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <p>Cidade: <input type="text" size="15" required="required" pattern="[aA-zZ\s]+$" />
+                                Bairro: <input type="text" size="15" required="required"
+                                    pattern="[aA-zZ\s]+$" /><br><br>
+                                Rua: <input type="text" size="15" required="required" pattern="[aA-zZ\s]+$" />
+                                Número: <input type="number" size="1" required="required" pattern="[0-9]+$" cols="4" />
+                            </p>
+                            <hr>
+                        </div>
+
+                        <div class="mb-3">
+                            Quais cursos são oferecidos pela instituição? <select>;
+                                <option>Curso 1</option>
+                                <option>Curso 2 </option>
+                                <option>Curso 3 </option>
+                            </select>
+
+                        </div>
+                        <button type="submit" class="btn btn-primary">Entrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">LOGIN</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="email" class="form-control" id="email_aluno" required="required"
+                                placeholder="texto@texto.com.br">
+                        </div>
+                        <div class="mb-3">
+                            <label for="senha" class="form-label">Senha:</label>
+                            <input type="password" class="form-control" required="required" id="senha_aluno_login">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Entrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
+        </script>
+</body>
+
+</html>

@@ -11,86 +11,86 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.belval.crud.model.Produto;
-import br.com.belval.crud.model.TipoProduto;
-import br.com.belval.crud.repository.ProdutoRepository;
-import br.com.belval.crud.repository.TipoProdutoRepository;
+import br.com.belval.crud.model.Pessoa;
+import br.com.belval.crud.model.TipoPessoa;
+import br.com.belval.crud.repository.PessoaRepository;
+import br.com.belval.crud.repository.TipoPessoaRepository;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
-public class ProdutoController {
+public class PessoaController {
 	
 	@Autowired
-	private ProdutoRepository repository;
+	private PessoaRepository repository;
 	
 	@Autowired
-	private TipoProdutoRepository tipoRepository;
+	private TipoPessoaRepository tipoRepository;
 
-	@GetMapping("/produto/novo")
+	@GetMapping("/pessoa/novo")
 	public String novo(Model model) {
-		Iterable<TipoProduto> tipos = tipoRepository.findAll();
+		Iterable<TipoPessoa> tipos = tipoRepository.findAll();
 		model.addAttribute("tipos", tipos);
-		model.addAttribute("produto", new Produto());
-		return "produto";
+		model.addAttribute("pessoa", new Pessoa());
+		return "pessoa";
 	}
 	
-	@GetMapping("/produto/{id}/edit")
+	@GetMapping("/pessoa/{id}/edit")
 	public String editar(@PathVariable int id, Model model) {
 		
-		Produto produto = repository.findById(id);
+		Pessoa pessoa = repository.findById(id);
 		
-		if (produto == null) {
-			return "produto-nao-encontrado";
+		if (pessoa == null) {
+			return "cadastro-nao-encontrado";
 		}
 		
 		model.addAttribute("tipos", tipoRepository.findAll());
-		model.addAttribute("produto", produto);
+		model.addAttribute("pessoa", pessoa);
 		
-		return "produto";
+		return "pessoa";
 	}
 	
-	@PostMapping("/produto/novo")
-	public ModelAndView novo(Produto produto, RedirectAttributes redirectAttributes) {
-		ModelAndView modelAndView = new ModelAndView("redirect:/produto/list");
+	@PostMapping("/pessoa/novo") // ver o que fazer
+	public ModelAndView novo(Pessoa pessoa, RedirectAttributes redirectAttributes) {
+		ModelAndView modelAndView = new ModelAndView("redirect:/pessoa/list");
 		
-		if (produto.getId() == 0) {
-			redirectAttributes.addFlashAttribute("msg","Novo produto criado!");
+		if (pessoa.getId() == 0) {
+			redirectAttributes.addFlashAttribute("msg","Cadastro Criado com Sucesso!");
 		} else {
-			redirectAttributes.addFlashAttribute("msg","Produto atualizado!");
+			redirectAttributes.addFlashAttribute("msg","Cadastro atualizado!");
 		}
-		repository.save(produto);
+		repository.save(pessoa);
 		
 		return modelAndView;
 	}
 
-	@GetMapping("/produto/list")
+	@GetMapping("/pessoa/list") // ver tbm
 	public String list(Model model) {
-		model.addAttribute("produtos", repository.findByAtivo(true));
-		return "lista-produtos";
+		model.addAttribute("pessoa", repository.findByAtivo(true));
+		return "lista-pessoa";
 	}
 	
-	@GetMapping("/produto/{id}")
+	@GetMapping("/pessoa/{id}")
 	public String detalhe(@PathVariable int id, Model model) {
-		Produto produto = repository.findById(id);
+		Pessoa pessoa = repository.findById(id);
 		
-		if (produto != null) {
-			model.addAttribute("produto", produto);
-			return "detalhe-produto";
+		if (pessoa != null) {
+			model.addAttribute("pessoa", pessoa);
+			return "detalhe-pessoa"; // ver tbm
 		}
 		
-		return "produto-nao-encontrado";
+		return "cadastro-nao-encontrado";
 	}
 
-	@GetMapping("/produto/{id}/excluir")
+	@GetMapping("/pessoa/{id}/excluir")
 	public String excluir(@PathVariable int id, RedirectAttributes redirectAttributes) {
 		//repository.deleteById(id);
-		Produto produto = repository.findById(id);
-		produto.setAtivo(false);
-		repository.save(produto);
+		Pessoa pessoa = repository.findById(id);
+		pessoa.setAtivo(false);
+		repository.save(pessoa);
 		
-		redirectAttributes.addFlashAttribute("msg","Produto excluído!");
+		redirectAttributes.addFlashAttribute("msg","Cadastro excluído!");
 		
-		return "redirect:/produto/list";
+		return "redirect:/pessoa/list";
 	}
 	
 	@GetMapping("/post-to-post-form")
